@@ -66,42 +66,67 @@ const Dashboard = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="p-6 bg-gradient-to-br from-foreground to-foreground/90 text-background shadow-heavy">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-background/70">Total balance</span>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => setShowBalance(!showBalance)}
-                className="text-background/70 hover:text-background hover:bg-background/10"
-              >
-                {showBalance ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </Button>
+          <Card className="p-6 bg-gradient-to-br from-foreground via-foreground to-foreground/95 text-background shadow-heavy relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute inset-0 bg-white/[0.03]" style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fill-rule='evenodd'%3e%3cg fill='%23ffffff' fill-opacity='0.03'%3e%3ccircle cx='30' cy='30' r='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e")`
+              }} />
             </div>
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold">
-                {showBalance ? formatCurrency(totalBalance, 'USD') : '••••••'}
-              </h2>
-              <p className="text-background/70 text-sm">
-                Primary account • {primaryAccount?.currency}
-              </p>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <Button
-                size="sm"
-                variant="secondary"
-                className="bg-background/10 text-background border-background/20 hover:bg-background/20"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add money
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                className="bg-background/10 text-background border-background/20 hover:bg-background/20"
-              >
-                Send
-              </Button>
+            
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">R</span>
+                  </div>
+                  <span className="text-background/80 font-medium">Total balance</span>
+                </div>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => setShowBalance(!showBalance)}
+                  className="text-background/70 hover:text-background hover:bg-background/10 rounded-full"
+                >
+                  {showBalance ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </Button>
+              </div>
+              
+              <div className="space-y-3">
+                <motion.h2 
+                  className="text-4xl font-bold tracking-tight"
+                  key={showBalance ? 'shown' : 'hidden'}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {showBalance ? formatCurrency(totalBalance, 'USD') : '••••••••'}
+                </motion.h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <p className="text-background/80 text-sm">
+                    Primary account • {primaryAccount?.currency} • Live rates
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 mt-8">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="bg-background/15 text-background border-background/30 hover:bg-background/25 backdrop-blur-sm tap-feedback flex-1"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add money
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary" 
+                  className="bg-background/15 text-background border-background/30 hover:bg-background/25 backdrop-blur-sm tap-feedback flex-1"
+                >
+                  Send money
+                </Button>
+              </div>
             </div>
           </Card>
         </motion.div>
