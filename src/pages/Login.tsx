@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useAuthStore } from '@/store/auth';
 import { useAppStore } from '@/store/app';
 import { Button } from '@/components/ui/button';
@@ -11,40 +8,59 @@ import { Label } from '@/components/ui/label';
 import { Eye, EyeOff, Moon, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const loginSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-});
-
-type LoginForm = z.infer<typeof loginSchema>;
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
   const { login, register, isLoading } = useAuthStore();
   const { theme, toggleTheme } = useAppStore();
 
-  const {
-    register: registerField,
-    handleSubmit,
-    formState: { errors, isValid },
-    watch,
-  } = useForm<LoginForm>({
-    resolver: zodResolver(loginSchema),
-    mode: 'onChange',
-  });
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) return 'Email is required';
+    if (!emailRegex.test(email)) return 'Please enter a valid email address';
+    return '';
+  };
 
-  const watchedFields = watch();
+  const validatePassword = (password: string) => {
+    if (!password) return 'Password is required';
+    if (password.length < 6) return 'Password must be at least 6 characters';
+    return '';
+  };
 
-  const onSubmit = async (data: LoginForm) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setEmailError(validateEmail(value));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setPasswordError(validatePassword(value));
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError('');
+    
+    const emailErr = validateEmail(email);
+    const passwordErr = validatePassword(password);
+    
+    setEmailError(emailErr);
+    setPasswordError(passwordErr);
+    
+    if (emailErr || passwordErr) return;
     
     try {
       const success = isSignUp 
-        ? await register(data.email, data.password, 'New User')
-        : await login(data.email, data.password);
+        ? await register(email, password, 'New User')
+        : await login(email, password);
       
       if (success) {
         navigate('/dashboard');
@@ -55,6 +71,8 @@ const Login = () => {
       setError('Something went wrong. Please try again.');
     }
   };
+
+  const isFormValid = email && password && !emailError && !passwordError;
 
   return (
     <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
@@ -150,7 +168,7 @@ const Login = () => {
 
           {/* Form */}
           <motion.form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={onSubmit}
             className="space-y-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -165,26 +183,27 @@ const Login = () => {
                   type="email"
                   placeholder="you@example.com"
                   className="input-revolut h-14 text-base"
-                  {...registerField('email')}
+                  value={email}
+                  onChange={handleEmailChange}
                 />
                 <motion.div
                   className="absolute inset-x-0 bottom-0 h-0.5 bg-success rounded-full origin-left"
                   initial={{ scaleX: 0 }}
                   animate={{ 
-                    scaleX: watchedFields.email && !errors.email ? 1 : 0 
+                    scaleX: email && !emailError ? 1 : 0 
                   }}
                   transition={{ duration: 0.2 }}
                 />
               </div>
               <AnimatePresence>
-                {errors.email && (
+                {emailError && (
                   <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="text-sm text-destructive"
                   >
-                    {errors.email.message}
+                    {emailError}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -199,7 +218,8 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
                   className="input-revolut h-14 text-base pr-12"
-                  {...registerField('password')}
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
                 <button
                   type="button"
@@ -212,20 +232,20 @@ const Login = () => {
                   className="absolute inset-x-0 bottom-0 h-0.5 bg-success rounded-full origin-left"
                   initial={{ scaleX: 0 }}
                   animate={{ 
-                    scaleX: watchedFields.password && !errors.password ? 1 : 0 
+                    scaleX: password && !passwordError ? 1 : 0 
                   }}
                   transition={{ duration: 0.2 }}
                 />
               </div>
               <AnimatePresence>
-                {errors.password && (
+                {passwordError && (
                   <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="text-sm text-destructive"
                   >
-                    {errors.password.message}
+                    {passwordError}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -248,7 +268,7 @@ const Login = () => {
             {/* Submit Button */}
             <Button
               type="submit"
-              disabled={!isValid || isLoading}
+              disabled={!isFormValid || isLoading}
               className="btn-revolut w-full h-14 text-base font-medium bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50"
             >
               <AnimatePresence mode="wait">
