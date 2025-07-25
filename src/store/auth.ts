@@ -20,7 +20,7 @@ interface AuthState {
 
 // Mock user data for demo
 const mockUsers = [
-  { id: '1', email: 'demo@apple.com', password: 'demo123', name: 'Apple User' },
+  { id: '1', email: 'demo@revolut.com', password: 'password', name: 'John Doe' },
   { id: '2', email: 'user@example.com', password: '123456', name: 'Jane Smith' },
 ];
 
