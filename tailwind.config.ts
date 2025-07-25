@@ -19,7 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'inter': ['Inter', 'sans-serif'],
+				'sf-pro-display': ['SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Inter', 'sans-serif'],
+				'sf-pro-text': ['SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -62,6 +63,15 @@ export default {
 				premium: {
 					DEFAULT: 'hsl(var(--premium))',
 					foreground: 'hsl(var(--premium-foreground))'
+				},
+				'apple-blue': {
+					DEFAULT: 'hsl(var(--apple-blue))',
+					foreground: 'hsl(var(--apple-blue-foreground))'
+				},
+				'apple-gray': {
+					DEFAULT: 'hsl(var(--apple-gray))',
+					light: 'hsl(var(--apple-gray-light))',
+					dark: 'hsl(var(--apple-gray-dark))'
 				}
 			},
 			borderRadius: {

@@ -2,110 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Revolut-inspired design system with pixel-perfect fidelity */
+/* Apple-inspired design system with pixel-perfect fidelity */
 
 @layer base {
   :root {
-    /* Core Revolut colors - Light mode */
+    /* Apple colors - Light mode */
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
     
-    /* Revolut's signature blacks and greys */
+    /* Apple's signature greys and whites */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 0%;
     
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
     
-    /* Revolut's primary brand colors */
-    --primary: 0 0% 0%;
+    /* Apple's primary brand colors */
+    --primary: 210 100% 50%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 97%;
+    --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 0%;
     
-    --muted: 0 0% 96%;
+    --muted: 0 0% 95%;
     --muted-foreground: 0 0% 45%;
     
-    --accent: 0 0% 96%;
+    --accent: 0 0% 95%;
     --accent-foreground: 0 0% 0%;
     
-    /* Revolut blue for success/positive */
-    --success: 211 100% 50%;
+    /* Apple blue */
+    --apple-blue: 210 100% 50%;
+    --apple-blue-foreground: 0 0% 100%;
+    
+    /* Apple colors */
+    --apple-gray: 0 0% 45%;
+    --apple-gray-light: 0 0% 96%;
+    --apple-gray-dark: 0 0% 15%;
+    
+    /* Success and destructive */
+    --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
     
-    /* Revolut red for destructive actions */
-    --destructive: 0 91% 71%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Revolut purple for premium features */
-    --premium: 253 93% 66%;
-    --premium-foreground: 0 0% 100%;
-    
     /* Border and input styling */
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --ring: 211 100% 50%;
+    --border: 0 0% 89%;
+    --input: 0 0% 96%;
+    --ring: 210 100% 50%;
     
-    /* Revolut's rounded corner system */
+    /* Apple's rounded corner system */
     --radius: 0.75rem;
     
-    /* Custom Revolut gradients */
-    --gradient-blue: linear-gradient(135deg, hsl(211, 100%, 50%) 0%, hsl(211, 100%, 45%) 100%);
-    --gradient-purple: linear-gradient(135deg, hsl(253, 93%, 66%) 0%, hsl(253, 93%, 60%) 100%);
-    --gradient-dark: linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 10%) 100%);
+    /* Apple gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(210, 100%, 45%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(0, 0%, 15%) 0%, hsl(0, 0%, 5%) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     
-    /* Shadows for neumorphism */
-    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.12);
+    /* Apple shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     
-    /* Revolut transitions */
-    --transition-fast: all 0.15s cubic-bezier(0.2, 0, 0, 1);
-    --transition-medium: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-    --transition-slow: all 0.5s cubic-bezier(0.2, 0, 0, 1);
+    /* Apple transitions */
+    --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-medium: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-slow: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Apple typography */
+    --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+    --font-text: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
   }
 
   .dark {
-    /* Revolut Dark mode */
+    /* Apple Dark mode */
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
     
-    --card: 0 0% 4%;
+    --card: 0 0% 2%;
     --card-foreground: 0 0% 100%;
     
-    --popover: 0 0% 4%;
+    --popover: 0 0% 2%;
     --popover-foreground: 0 0% 100%;
     
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 10%;
+    --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 8%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 6%;
+    --muted-foreground: 0 0% 65%;
     
     --accent: 0 0% 8%;
     --accent-foreground: 0 0% 100%;
     
-    --success: 211 100% 50%;
+    --apple-blue: 210 100% 50%;
+    --apple-blue-foreground: 0 0% 100%;
+    
+    --apple-gray: 0 0% 65%;
+    --apple-gray-light: 0 0% 8%;
+    --apple-gray-dark: 0 0% 90%;
+    
+    --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
     
-    --destructive: 0 91% 71%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --premium: 253 93% 66%;
-    --premium-foreground: 0 0% 100%;
-    
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 211 100% 50%;
+    --border: 0 0% 15%;
+    --input: 0 0% 8%;
+    --ring: 210 100% 50%;
     
     /* Dark mode shadows */
-    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
-    --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -115,11 +129,13 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
-    font-feature-settings: "cv01", "cv03", "cv04", "cv11";
+    @apply bg-background text-foreground;
+    font-family: var(--font-text);
+    font-feature-settings: "kern", "liga", "clig", "calt";
     overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
   
   /* Mobile optimizations */
@@ -134,63 +150,104 @@
 }
 
 @layer components {
-  /* Revolut-style button animations */
-  .btn-revolut {
+  /* Apple-style button animations */
+  .btn-apple {
     @apply relative overflow-hidden transition-all duration-200 ease-out;
-    @apply active:scale-95 active:brightness-95;
+    @apply active:scale-95 hover:brightness-105;
   }
   
-  .btn-revolut::before {
+  .btn-apple::before {
     content: '';
     @apply absolute inset-0 bg-white/10 scale-x-0 transition-transform duration-300 ease-out;
-    transform-origin: left;
+    transform-origin: center;
   }
   
-  .btn-revolut:hover::before {
+  .btn-apple:hover::before {
     @apply scale-x-100;
   }
   
-  /* Revolut card animations */
-  .card-revolut {
+  /* Apple card hover effects */
+  .card-apple {
     @apply transition-all duration-300 ease-out;
-    @apply hover:shadow-lg hover:-translate-y-1;
+    @apply hover:shadow-xl hover:-translate-y-2;
   }
   
-  /* Revolut input animations */
-  .input-revolut {
+  /* Apple input animations */
+  .input-apple {
     @apply transition-all duration-200 ease-out;
-    @apply focus:scale-105 focus:shadow-md;
+    @apply focus:ring-2 focus:ring-apple-blue/50 focus:border-apple-blue;
   }
   
-  /* Mobile tap feedback */
+  /* Apple tap feedback */
   .tap-feedback {
     @apply transition-transform duration-100 ease-out;
     @apply active:scale-95;
   }
   
-  /* Revolut gradients */
-  .gradient-blue {
-    background: var(--gradient-blue);
-  }
-  
-  .gradient-purple {
-    background: var(--gradient-purple);
+  /* Apple gradients */
+  .gradient-hero {
+    background: var(--gradient-hero);
   }
   
   .gradient-dark {
     background: var(--gradient-dark);
   }
   
-  /* Neumorphism shadows */
-  .shadow-light {
-    box-shadow: var(--shadow-light);
+  .gradient-glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   
-  .shadow-medium {
-    box-shadow: var(--shadow-medium);
+  /* Apple shadows */
+  .shadow-apple-sm {
+    box-shadow: var(--shadow-sm);
   }
   
-  .shadow-heavy {
-    box-shadow: var(--shadow-heavy);
+  .shadow-apple-md {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .shadow-apple-lg {
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .shadow-apple-xl {
+    box-shadow: var(--shadow-xl);
+  }
+  
+  /* Apple scroll snap */
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+  }
+  
+  .scroll-snap-start {
+    scroll-snap-align: start;
+  }
+  
+  /* Apple glass morphism */
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Apple parallax container */
+  .parallax-container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  /* Apple text animations */
+  .text-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .text-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
